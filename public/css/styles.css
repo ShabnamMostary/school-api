@@ -1,0 +1,17 @@
+.left-sidebar {
+  width:100px;
+  height:100%;
+  position:fixed!important;
+  z-index:1;
+  overflow:auto
+}
+
+.leftbar-items {
+  padding:8px 16px;
+  float:left;
+  width:auto;
+  border:none;
+  display:block;
+  outline:0
+}
+

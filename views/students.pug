@@ -1,0 +1,19 @@
+html
+  head
+    link(rel="stylesheet" href="/css/styles.css")
+  body
+    div
+      header Welcome to Stack Education
+    div
+         h2 Students
+          table
+            tr
+              th ID
+              th Name
+              th Department
+            for student in students
+              tr
+                td= student.id
+                td= student.name
+                td= student.departmentID
+              
