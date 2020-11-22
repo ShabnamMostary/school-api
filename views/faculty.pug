@@ -5,17 +5,15 @@ html
     div
       header Welcome to Stack Education
     div
-         h2 Students
+         h2 Faculty
           table
             tr
-              th ID
               th Name
               th Department
-            for student in students
+            for f in faculty
               tr
-                td= student.id
-                td= student.name
-                if student.departmentID == 1
+                td= f.name
+                if f.departmentID == 1
                   td Compute Science & Engineering
                 else
                   td Electrical Engineering

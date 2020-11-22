@@ -12,6 +12,9 @@ app.get('/', (request, response) => {
 app.get('/students', (request, response) => {
   return response.render('students', { students })
 })
+app.get('/faculty', (request, response) => {
+  return response.render('faculty', { faculty })
+})
 
 
 
