@@ -1,0 +1,73 @@
+html
+  head
+    link(rel="stylesheet" href="/css/styles.css")
+  body
+    div
+         h2 Welcome to the School API
+         table
+            tr
+              th Method
+              th Route
+              th Headers
+              th Body
+              th Description
+            tr
+              td GET
+              td /departments
+              td None needed
+              td N/A
+              td Return a list of all departments in the database
+            tr
+              td GET
+              td /departments/{name}
+              td None needed
+              td N/A
+              td Return data for  department by name
+            tr
+              td GET
+              td /faculty
+              td None needed
+              td N/A
+              td Return a list of all faculty in the database
+            tr
+              td GET
+              td /faculty/{name}
+              td None needed
+              td N/A
+              td Return data for a faculty by name
+            tr
+              td GET
+              td /students
+              td None needed
+              td N/A
+              td Return a list of all students in the database
+            tr
+              td GET
+              td /students/{name}
+              td None needed
+              td N/A
+              td Return data for a student by name
+            tr
+              td POST
+              td /faculty
+              td Content-Type:application/json
+              td {"name": "Joseph Wilson","id":"1","departmentID":"1","research-area":"Database"}
+              td Saves a new faculty to the database
+            tr
+              td POST
+              td /students
+              td Content-Type:application/json
+              td {"name": "Jack Sanders","id":"1","departmentID":"1","research-area":"Database"}
+              td Saves a new student to the database
+            tr
+              td DELETE
+              td /faculty/{name}
+              td None needed
+              td N/A
+              td Delete the faculty associated with the {name} from the database
+            tr
+              td DELETE
+              td /students/{name}
+              td None needed
+              td N/A
+              td Delete the student associated with the {name} from the database

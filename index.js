@@ -1,3 +1,4 @@
+const { request, response } = require('express')
 const express = require('express')
 const { departments, students, faculty } = require('./schools')
 // const bodyParser = require('body-parser')
@@ -8,6 +9,9 @@ app.use(express.static('public'))
 
 app.get('/', (request, response) => {
   return response.render('index')
+})
+app.get('/api', (request, response) => {
+  return response.render('api')
 })
 app.get('/students', (request, response) => {
   return response.render('students', { students })
