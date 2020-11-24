@@ -1,9 +1,9 @@
 html
   head
-    link(rel="stylesheet" href="/css/styles.css")
+    link(rel="stylesheet" href="/css/apistyles.css")
   body
     div
-         h2 Welcome to the School API
+         h1 School API
          table
             tr
               th Method
@@ -12,62 +12,62 @@ html
               th Body
               th Description
             tr
-              td GET
+              td(class='capital') Get
               td /departments
               td None needed
               td N/A
-              td Return a list of all departments in the database
+              td Returns a list of all departments in the database
             tr
-              td GET
+              td(class='capital') Get
               td /departments/{name}
               td None needed
               td N/A
-              td Return data for  department by name
+              td Returns data for  department by name
             tr
-              td GET
+              td(class='capital') Get
               td /faculty
               td None needed
               td N/A
-              td Return a list of all faculty in the database
+              td Returns a list of all faculty in the database
             tr
-              td GET
+              td(class='capital') Get
               td /faculty/{name}
               td None needed
               td N/A
-              td Return data for a faculty by name
+              td Returns data for a faculty by name
             tr
-              td GET
+              td(class='capital') Get
               td /students
               td None needed
               td N/A
-              td Return a list of all students in the database
+              td Returns a list of all students in the database
             tr
-              td GET
+              td(class='capital') Get
               td /students/{name}
               td None needed
               td N/A
-              td Return data for a student by name
+              td Returns data for a student by name
             tr
-              td POST
+              td(class='capital orange') Post
               td /faculty
-              td Content-Type:application/json
-              td {"name": "Joseph Wilson","id":"1","departmentID":"1","research-area":"Database"}
+              td Content-Type: application/json
+              td {"name": "Joseph Wilson","id":"1", "departmentID":"1","research-area":"Database"}
               td Saves a new faculty to the database
             tr
-              td POST
+              td(class='capital orange') Post
               td /students
-              td Content-Type:application/json
-              td {"name": "Jack Sanders","id":"1","departmentID":"1","research-area":"Database"}
+              td Content-Type: application/json
+              td {"name": "Jack Sanders","id":"1", "departmentID":"1","research-area":"Systems"}
               td Saves a new student to the database
             tr
-              td DELETE
+              td(class='capital red') Delete
               td /faculty/{name}
               td None needed
               td N/A
-              td Delete the faculty associated with the {name} from the database
+              td Deletes the faculty associated with the {name} from the database
             tr
-              td DELETE
+              td(class='capital red') Delete
               td /students/{name}
               td None needed
               td N/A
-              td Delete the student associated with the {name} from the database
+              td Deletes the student associated with the {name} from the database

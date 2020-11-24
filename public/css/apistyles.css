@@ -1,0 +1,36 @@
+body {
+  font-family:Tahoma, sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  margin: auto;
+  width:90%;
+  text-align: center;
+}
+table tr td {
+  border: 2px solid black;
+  padding: 10px;
+}
+table th {
+  background-color: rgb(102, 151, 199);
+  padding:5px;
+  text-align: center;
+  color: white;
+  border:2px solid black
+}
+.capital {
+  text-transform: uppercase;
+  color:rgb(40, 139, 40);
+  font-weight: bold;
+}
+.orange{
+  color:rgb(180, 122, 15)
+}
+.red{
+  color: rgb(184, 30, 30)
+}
