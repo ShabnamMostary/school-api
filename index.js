@@ -4,6 +4,7 @@ const app = express()
 app.set('view engine', 'pug')
 app.use(express.static('public'))
 
+app.get('/departments')
 app.get('/api', (request, response) => {
   return response.render('api')
 })
