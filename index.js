@@ -1,13 +1,14 @@
 const express = require('express')
+const { getAllDepartments, getDepartmentByName } = require('./controllers/departments')
 const app = express()
 
 app.set('view engine', 'pug')
 app.use(express.static('public'))
-
-app.get('/departments')
 app.get('/api', (request, response) => {
   return response.render('api')
 })
+app.get('/departments', getAllDepartments)
+app.get('/department/:name', getDepartmentByName)
 app.all('*', (request, response) => {
   return response.sendStatus(404)
 })
