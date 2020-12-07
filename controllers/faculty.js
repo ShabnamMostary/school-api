@@ -6,6 +6,35 @@ const getAllFaculty = async (request, response) => {
     ? response.send(faculty)
     : response.sendStatus(404)
 }
+const addNewFaculty = async (request, response) => {
+  try {
+    const { name, departmentId, email, research_area } = request.body
+
+    if (!name || !departmentId || !email || !research_area) {
+      return response.status(400).send('Following items are required name,departmentId,email and research_area')
+    }
+
+    const addNewFaculty = await models.Faculty.create({ name, departmentId, email, research_area })
+
+    return response.status(201).send(addNewFaculty)
+  } catch (error) {
+    return response.status(500).send('Unable to save new faculty, please try again')
+  }
+}
+const deleteFaculty = async (request, response) => {
+  try {
+    const { name } = request.params
+
+    const faculty = await models.Faculty.findOne({ where: { name } })
+
+    if (!faculty) return response.status(404).send(`No faculty matching the name: ${name}`)
+    await models.Faculty.destroy({ where: { name } })
+
+    return response.send(`Successfully deleted the faculty: ${name}.`)
+  } catch (error) {
+    return response.status(500).send('Unknown error while deleting faculty, please try again.')
+  }
+}
 
 
-module.exports = { getAllFaculty }
+module.exports = { getAllFaculty, addNewFaculty, deleteFaculty }
