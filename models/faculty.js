@@ -6,9 +6,10 @@ const faculty = (connection, Sequelize, Departments) => {
     email: { type: Sequelize.STRING },
     research_area: { type: Sequelize.STRING },
   }, {
+    tableName: 'faculty',
     defaultScope: {
       attributes: { exclude: ['deletedAt'] }
-    }
+    },
   }, { paranoid: true })
 }
 
