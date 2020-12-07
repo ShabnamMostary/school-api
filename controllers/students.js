@@ -21,7 +21,21 @@ const addNewStudent = async (request, response) => {
     return response.status(500).send('Unable to save new student, please try again')
   }
 }
+const deleteStudent = async (request, response) => {
+  try {
+    const { name } = request.params
+
+    const student = await models.Students.findOne({ where: { name } })
+
+    if (!student) return response.status(404).send(`No student matching the name: ${name}`)
+    await models.Students.destroy({ where: { name } })
+
+    return response.send(`Successfully deleted the student: ${name}.`)
+  } catch (error) {
+    return response.status(500).send('Unknown error while deleting student, please try again.')
+  }
+}
 
 
 
-module.exports = { getAllStudents, addNewStudent }
+module.exports = { getAllStudents, addNewStudent, deleteStudent }
