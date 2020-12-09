@@ -20,5 +20,6 @@ Students.belongsTo(Departments)
 module.exports = {
   Departments,
   Faculty,
-  Students
+  Students,
+  Op: Sequelize.Op,
 }

@@ -6,6 +6,24 @@ const getAllFaculty = async (request, response) => {
     ? response.send(faculty)
     : response.sendStatus(404)
 }
+const getFacultyByName = async (request, response) => {
+  try {
+    const { name } = request.params
+
+    const faculty = await models.Faculty.findOne({
+      where: {
+        name: { [models.Op.like]: `%${name}%` },
+      }
+    })
+
+    return faculty
+      ? response.send(faculty)
+      : response.sendStatus(404)
+  } catch (error) {
+    return response.status(500).send('Unable to retrieve faculty, please try again')
+  }
+}
+
 const addNewFaculty = async (request, response) => {
   try {
     const { name, departmentId, email, research_area } = request.body
@@ -37,4 +55,4 @@ const deleteFaculty = async (request, response) => {
 }
 
 
-module.exports = { getAllFaculty, addNewFaculty, deleteFaculty }
+module.exports = { getAllFaculty, getFacultyByName, addNewFaculty, deleteFaculty }
