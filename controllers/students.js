@@ -6,6 +6,24 @@ const getAllStudents = async (request, response) => {
     ? response.send(students)
     : response.sendStatus(404)
 }
+const getStudentByName = async (request, response) => {
+  try {
+    const { name } = request.params
+
+    const student = await models.Students.findOne({
+      where: {
+        name: { [models.Op.like]: `%${name}%` },
+      }
+    })
+
+    return student
+      ? response.send(student)
+      : response.sendStatus(404)
+  } catch (error) {
+    return response.status(500).send('Unable to retrieve student, please try again')
+  }
+}
+
 const addNewStudent = async (request, response) => {
   try {
     const { name, departmentId, email, research_area } = request.body
@@ -38,4 +56,4 @@ const deleteStudent = async (request, response) => {
 
 
 
-module.exports = { getAllStudents, addNewStudent, deleteStudent }
+module.exports = { getAllStudents, getStudentByName, addNewStudent, deleteStudent }
