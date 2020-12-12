@@ -1,10 +1,10 @@
 const faculty = (connection, Sequelize, Departments) => {
   return connection.define('faculty', {
     id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
-    name: { type: Sequelize.STRING },
+    name: { type: Sequelize.STRING, allowNull: false },
     departmentId: { type: Sequelize.INTEGER, references: { model: Departments, key: 'id' } },
-    email: { type: Sequelize.STRING },
-    research_area: { type: Sequelize.STRING },
+    email: { type: Sequelize.STRING, allowNull: false },
+    research_area: { type: Sequelize.STRING, allowNull: false },
   }, {
     tableName: 'faculty',
     defaultScope: {
