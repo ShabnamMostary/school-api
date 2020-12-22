@@ -58,6 +58,4 @@ const deleteStudent = async (request, response) => {
   }
 }
 
-
-
 module.exports = { getAllStudents, getStudentByName, addNewStudent, deleteStudent }
