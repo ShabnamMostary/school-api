@@ -12,6 +12,7 @@ describe('Controllers - FacultyApi', () => {
   let stubbedFindAll
   let stubbedFindOne
   let stubbedCreate
+  let stubbedDestroy
   let stubbedSend
   let response
   let stubbedSendStatus
@@ -23,6 +24,7 @@ describe('Controllers - FacultyApi', () => {
     stubbedFindAll = sandbox.stub(models.Faculty, 'findAll')
     stubbedFindOne = sandbox.stub(models.Faculty, 'findOne')
     stubbedCreate = sandbox.stub(models.Faculty, 'create')
+    stubbedDestroy = sandbox.stub(models.Faculty, 'destroy')
     stubbedSend = sandbox.stub()
     stubbedSendStatus = sandbox.stub()
     stubbedStatusDotSend = sandbox.stub()
@@ -104,6 +106,36 @@ describe('Controllers - FacultyApi', () => {
       expect(stubbedCreate).to.have.been.calledWith(singleFaculty)
       expect(stubbedStatus).to.have.been.calledWith(500)
       expect(stubbedStatusDotSend).to.have.been.calledWith('Unable to save new faculty, please try again')
+    })
+  })
+  describe('deleteFaculty', () => {
+    it('deletes a faculty associated with the provided name from the database.', async () => {
+      stubbedFindOne.returns(singleFaculty)
+      const request = { params: { name: 'Scott' } }
+      await deleteFaculty(request, response)
+      expect(stubbedDestroy).to.have.calledWith({ where: { name: request.params.name } })
+      expect(stubbedSend).to.have.been.calledWith(`Successfully deleted the faculty: ${request.params.name}.`)
+    })
+
+    it('returns a 404 status and a message when no faculty is found matching the name provided by the user.', async () => {
+      stubbedFindOne.returns(null)
+
+      const request = { params: { name: 'Fakeman' } }
+
+      await deleteFaculty(request, response)
+
+      expect(stubbedDestroy).to.have.callCount(0)
+      expect(stubbedStatus).to.have.been.calledWith(404)
+      expect(stubbedStatusDotSend).to.have.been.calledWith(`No faculty matching the name: ${request.params.name}`)
+    })
+    it('returns a 500 status with a message when the database call throws an error.', async () => {
+      stubbedFindOne.throws('ERROR!')
+
+      await deleteFaculty({}, response)
+
+      expect(stubbedDestroy).to.have.callCount(0)
+      expect(stubbedStatus).to.have.been.calledWith(500)
+      expect(stubbedStatusDotSend).to.have.been.calledWith('Unknown error while deleting faculty, please try again.')
     })
   })
 })
