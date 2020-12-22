@@ -1,12 +1,17 @@
+/* eslint-disable max-len */
 const chai = require('chai')
 const sinon = require('sinon')
 const sinonChai = require('sinon-chai')
 const models = require('../../models')
-const { before, beforeEach, afterEach, describe, it } = require('mocha')
+const {
+  before, beforeEach, afterEach, describe, it
+} = require('mocha')
 const { getAllDepartments, getDepartmentByName } = require('../../controllers/departments')
 const { departmentList, singleDepartment } = require('../mocks/departments')
+
 chai.use(sinonChai)
 const { expect } = chai
+
 describe('Controllers - DepartmentsApi', () => {
   let sandbox
   let stubbedFindAll
@@ -45,6 +50,12 @@ describe('Controllers - DepartmentsApi', () => {
       expect(stubbedFindAll).to.have.callCount(1)
       expect(stubbedSend).to.have.been.calledWith(departmentList)
     })
+    it('returns status 404 when departmentList is empty', async () => {
+      stubbedFindAll.returns(null)
+      await getAllDepartments({}, response)
+      expect(stubbedFindAll).to.have.callCount(1)
+      expect(stubbedSendStatus).to.have.been.calledWith(404)
+    })
     it('returns status 500 with an error message when database throws an error', async () => {
       stubbedFindAll.throws('ERROR!')
       await getAllDepartments({}, response)
@@ -61,7 +72,7 @@ describe('Controllers - DepartmentsApi', () => {
       await getDepartmentByName(request, response)
       expect(stubbedFindOne).to.have.been.calledWith({
         where: {
-          name: { [models.Op.like]: `%Mechanical%` },
+          name: { [models.Op.like]: '%Mechanical%' },
         }
       })
       expect(stubbedSend).to.have.been.calledWith(singleDepartment)

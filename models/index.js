@@ -18,7 +18,6 @@ Departments.hasMany(Students)
 Faculty.belongsTo(Departments)
 Students.belongsTo(Departments)
 
-
 module.exports = {
   Departments,
   Faculty,

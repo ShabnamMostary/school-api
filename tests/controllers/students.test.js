@@ -1,12 +1,17 @@
+/* eslint-disable max-len */
 const chai = require('chai')
 const sinon = require('sinon')
 const sinonChai = require('sinon-chai')
 const models = require('../../models')
-const { before, beforeEach, afterEach, describe, it } = require('mocha')
+const {
+  before, beforeEach, afterEach, describe, it
+} = require('mocha')
 const { getAllStudents, getStudentByName, addNewStudent, deleteStudent } = require('../../controllers/students')
 const { studentsList, singleStudent } = require('../mocks/students')
+
 chai.use(sinonChai)
 const { expect } = chai
+
 describe('Controllers - StudentApi', () => {
   let sandbox
   let stubbedFindAll
@@ -49,6 +54,12 @@ describe('Controllers - StudentApi', () => {
       expect(stubbedFindAll).to.have.callCount(1)
       expect(stubbedSend).to.have.been.calledWith(studentsList)
     })
+    it('returns status 404 when no studentsList is empty', async () => {
+      stubbedFindAll.returns(null)
+      await getAllStudents({}, response)
+      expect(stubbedFindAll).to.have.callCount(1)
+      expect(stubbedSendStatus).to.have.been.calledWith(404)
+    })
     it('returns status 500 with an error message when database throws an error', async () => {
       stubbedFindAll.throws('ERROR!')
       await getAllStudents({}, response)
@@ -65,7 +76,7 @@ describe('Controllers - StudentApi', () => {
       await getStudentByName(request, response)
       expect(stubbedFindOne).to.have.been.calledWith({
         where: {
-          name: { [models.Op.like]: `%Linda%` },
+          name: { [models.Op.like]: '%Linda%' },
         }
       })
       expect(stubbedSend).to.have.been.calledWith(singleStudent)
@@ -111,7 +122,9 @@ describe('Controllers - StudentApi', () => {
   describe('deleteStudent', () => {
     it('deletes a student associated with the provided name from the database.', async () => {
       stubbedFindOne.returns(singleStudent)
+
       const request = { params: { name: 'Linda' } }
+
       await deleteStudent(request, response)
       expect(stubbedDestroy).to.have.calledWith({ where: { name: request.params.name } })
       expect(stubbedSend).to.have.been.calledWith(`Successfully deleted the student: ${request.params.name}.`)

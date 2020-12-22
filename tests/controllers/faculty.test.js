@@ -1,12 +1,17 @@
+/* eslint-disable max-len */
 const chai = require('chai')
 const sinon = require('sinon')
 const sinonChai = require('sinon-chai')
 const models = require('../../models')
-const { before, beforeEach, afterEach, describe, it } = require('mocha')
+const {
+  before, beforeEach, afterEach, describe, it
+} = require('mocha')
 const { getAllFaculty, getFacultyByName, addNewFaculty, deleteFaculty } = require('../../controllers/faculty')
 const { facultyList, singleFaculty } = require('../mocks/faculty')
+
 chai.use(sinonChai)
 const { expect } = chai
+
 describe('Controllers - FacultyApi', () => {
   let sandbox
   let stubbedFindAll
@@ -49,6 +54,12 @@ describe('Controllers - FacultyApi', () => {
       expect(stubbedFindAll).to.have.callCount(1)
       expect(stubbedSend).to.have.been.calledWith(facultyList)
     })
+    it('returns status 404 when no facultyList is empty', async () => {
+      stubbedFindAll.returns(null)
+      await getAllFaculty({}, response)
+      expect(stubbedFindAll).to.have.callCount(1)
+      expect(stubbedSendStatus).to.have.been.calledWith(404)
+    })
     it('returns status 500 with an error message when database throws an error', async () => {
       stubbedFindAll.throws('ERROR!')
       await getAllFaculty({}, response)
@@ -65,7 +76,7 @@ describe('Controllers - FacultyApi', () => {
       await getFacultyByName(request, response)
       expect(stubbedFindOne).to.have.been.calledWith({
         where: {
-          name: { [models.Op.like]: `%Scott%` },
+          name: { [models.Op.like]: '%Scott%' },
         }
       })
       expect(stubbedSend).to.have.been.calledWith(singleFaculty)
@@ -112,6 +123,7 @@ describe('Controllers - FacultyApi', () => {
     it('deletes a faculty associated with the provided name from the database.', async () => {
       stubbedFindOne.returns(singleFaculty)
       const request = { params: { name: 'Scott' } }
+
       await deleteFaculty(request, response)
       expect(stubbedDestroy).to.have.calledWith({ where: { name: request.params.name } })
       expect(stubbedSend).to.have.been.calledWith(`Successfully deleted the faculty: ${request.params.name}.`)

@@ -11,7 +11,6 @@ app.get('/api', (request, response) => {
   return response.render('api')
 })
 app.get('/departments', getAllDepartments)
-// app.get('/department/:name', getDepartmentByName)
 app.get('/departments/:name', getDepartmentByName)
 app.get('/faculty', getAllFaculty)
 app.get('/faculty/:name', getFacultyByName)

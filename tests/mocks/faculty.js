@@ -23,6 +23,6 @@ const singleFaculty = {
   departmentId: 4,
   email: 'Scott.Challicum@ce.school.edu',
   research_area: 'traffic operations'
-
 }
+
 module.exports = { facultyList, singleFaculty }

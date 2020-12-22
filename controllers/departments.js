@@ -28,6 +28,4 @@ const getDepartmentByName = async (request, response) => {
   }
 }
 
-
-
 module.exports = { getAllDepartments, getDepartmentByName }

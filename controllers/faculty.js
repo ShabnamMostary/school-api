@@ -58,5 +58,4 @@ const deleteFaculty = async (request, response) => {
   }
 }
 
-
 module.exports = { getAllFaculty, getFacultyByName, addNewFaculty, deleteFaculty }
