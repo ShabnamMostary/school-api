@@ -1,10 +1,14 @@
 const models = require('../models')
 const getAllDepartments = async (request, response) => {
-  const departments = await models.Departments.findAll()
+  try {
+    const departments = await models.Departments.findAll()
 
-  return departments
-    ? response.send(departments)
-    : response.sendStatus(404)
+    return departments
+      ? response.send(departments)
+      : response.sendStatus(404)
+  } catch (error) {
+    return response.status(500).send('Unable to retrieve departments, please try again')
+  }
 }
 const getDepartmentByName = async (request, response) => {
   try {

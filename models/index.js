@@ -1,12 +1,14 @@
 const Sequelize = require('sequelize')
+const allConfigs = require('../config/sequelize')
 const DepartmentsModel = require('./departments')
 const FacultyModel = require('./faculty')
 const StudentsModel = require('./students')
+const environment = process.env.NODE_ENV || 'development'
+const config = allConfigs[environment]
 
-const connection = new Sequelize('school', 'admin77', 'school77', {
-  host: 'localhost', dialect: 'mysql'
+const connection = new Sequelize(config.database, config.username, config.password, {
+  host: config.host, dialect: config.dialect
 })
-
 const Departments = DepartmentsModel(connection, Sequelize)
 const Faculty = FacultyModel(connection, Sequelize, Departments)
 const Students = StudentsModel(connection, Sequelize, Departments)

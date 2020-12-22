@@ -1,10 +1,14 @@
 const models = require('../models')
 const getAllStudents = async (request, response) => {
-  const students = await models.Students.findAll()
+  try {
+    const students = await models.Students.findAll()
 
-  return students
-    ? response.send(students)
-    : response.sendStatus(404)
+    return students
+      ? response.send(students)
+      : response.sendStatus(404)
+  } catch (error) {
+    return response.status(500).send('Unable to retrieve students, please try again')
+  }
 }
 const getStudentByName = async (request, response) => {
   try {

@@ -1,10 +1,14 @@
 const models = require('../models')
 const getAllFaculty = async (request, response) => {
-  const faculty = await models.Faculty.findAll()
+  try {
+    const faculty = await models.Faculty.findAll()
 
-  return faculty
-    ? response.send(faculty)
-    : response.sendStatus(404)
+    return faculty
+      ? response.send(faculty)
+      : response.sendStatus(404)
+  } catch (error) {
+    return response.status(500).send('Unable to retrieve faculty, please try again')
+  }
 }
 const getFacultyByName = async (request, response) => {
   try {
@@ -32,9 +36,9 @@ const addNewFaculty = async (request, response) => {
       return response.status(400).send('Following items are required name,departmentId,email and research_area')
     }
 
-    const addNewFaculty = await models.Faculty.create({ name, departmentId, email, research_area })
+    const newFaculty = await models.Faculty.create({ name, departmentId, email, research_area })
 
-    return response.status(201).send(addNewFaculty)
+    return response.status(201).send(newFaculty)
   } catch (error) {
     return response.status(500).send('Unable to save new faculty, please try again')
   }
