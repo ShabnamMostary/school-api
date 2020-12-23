@@ -1,0 +1,73 @@
+html
+  head
+    link(rel="stylesheet" href="/css/apistyles.css")
+  body
+    div
+         h1 School API
+         table
+            tr
+              th Method
+              th Route
+              th Headers
+              th Body
+              th Description
+            tr
+              td(class='capital') Get
+              td /departments
+              td None needed
+              td N/A
+              td Returns a list of all departments in the database
+            tr
+              td(class='capital') Get
+              td /departments/{name}
+              td None needed
+              td N/A
+              td Returns data for  department by name
+            tr
+              td(class='capital') Get
+              td /faculty
+              td None needed
+              td N/A
+              td Returns a list of all faculty in the database
+            tr
+              td(class='capital') Get
+              td /faculty/{name}
+              td None needed
+              td N/A
+              td Returns data for a faculty by name
+            tr
+              td(class='capital') Get
+              td /students
+              td None needed
+              td N/A
+              td Returns a list of all students in the database
+            tr
+              td(class='capital') Get
+              td /students/{name}
+              td None needed
+              td N/A
+              td Returns data for a student by name
+            tr
+              td(class='capital orange') Post
+              td /faculty
+              td Content-Type: application/json
+              td {"name": "Joseph Wilson","id":"1", "departmentID":"1","research-area":"Database"}
+              td Saves a new faculty to the database
+            tr
+              td(class='capital orange') Post
+              td /students
+              td Content-Type: application/json
+              td {"name": "Jack Sanders","id":"1", "departmentID":"1","research-area":"Systems"}
+              td Saves a new student to the database
+            tr
+              td(class='capital red') Delete
+              td /faculty/{name}
+              td None needed
+              td N/A
+              td Deletes the faculty associated with the {name} from the database
+            tr
+              td(class='capital red') Delete
+              td /students/{name}
+              td None needed
+              td N/A
+              td Deletes the student associated with the {name} from the database
