@@ -38,7 +38,6 @@ describe('Controllers - StudentApi', () => {
       send: stubbedSend,
       sendStatus: stubbedSendStatus,
       status: stubbedStatus
-
     }
   })
   beforeEach(() => {

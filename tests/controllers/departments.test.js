@@ -34,7 +34,6 @@ describe('Controllers - DepartmentsApi', () => {
       send: stubbedSend,
       sendStatus: stubbedSendStatus,
       status: stubbedStatus
-
     }
   })
   beforeEach(() => {

@@ -38,7 +38,6 @@ describe('Controllers - FacultyApi', () => {
       send: stubbedSend,
       sendStatus: stubbedSendStatus,
       status: stubbedStatus
-
     }
   })
   beforeEach(() => {
